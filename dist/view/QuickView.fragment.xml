@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<QuickView id="quickView">
+		<QuickViewPage
+				pageId="quickViewPage"
+				header="{i18n>quickViewHeading}"
+					icon="{path: '/Photo', formatter: '.formatter.formatPhoto'}"
+					title="{/FirstName} {/LastName}"
+					description="{/Title}" >
+
+			<QuickViewGroup  heading="{i18n>quickVGroupheading}">
+				<QuickViewGroupElement
+					label="{i18n>address}"
+					value="{/LastName}"
+					type="text" />
+				<QuickViewGroupElement
+					label="{i18n>city}"
+					value="{/City}"
+					type="text" />
+				<QuickViewGroupElement
+					label="{i18n>postCode}"
+					value="{/PostalCode}"
+					type="text" />
+				<QuickViewGroupElement
+					label="{i18n>phone}"
+					value="{/HomePhone}"
+					type="text" />
+			</QuickViewGroup>
+		</QuickViewPage>
+	</QuickView>
+</core:FragmentDefinition>

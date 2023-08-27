@@ -1,0 +1,88 @@
+<mvc:View
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:layout="sap.ui.layout"
+	xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="au.com.bournedigital.developertest.controller.Object" displayBlock="true">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}">
+		<semantic:titleHeading>
+			<Title text="{Customer/CompanyName}" level="H2"/>
+		</semantic:titleHeading>
+		<semantic:titleContent>
+			<ObjectAttribute title="{i18n>objectPageOrderID}" text="{OrderID}"/>
+		</semantic:titleContent>
+		<semantic:headerContent>
+			<layout:HorizontalLayout allowWrapping="true">
+				<layout:VerticalLayout class="sapUiMediumMarginEnd">
+					<ObjectAttribute title="{i18n>objectPageContactName}" text="{Customer/ContactName}"/>
+					<ObjectAttribute title="{i18n>objectPageContactTitle}" text="{Customer/ContactTitle}"/>
+					<ObjectAttribute title="{i18n>objectPagePhone}" text="{Customer/Phone}"/>
+				</layout:VerticalLayout>
+				<layout:VerticalLayout class="sapUiMediumMarginEnd">
+					<ObjectAttribute title="{i18n>objectPageAddress}" text="{Customer/Address}"/>
+					<ObjectAttribute title="{i18n>objectPagePostalCode}" text="{Customer/PostalCode}"/>
+					<ObjectAttribute title="{i18n>objectPageCountry}" text="{Customer/Country}"/>
+				</layout:VerticalLayout>
+				<layout:VerticalLayout>
+					<Label text="{i18n>objectPageTotalValue}"/>
+					<ObjectNumber id="objectPageTotal" number="{path:'objectView>/totalOrderAmount', formatter:'.formatter.numberUnit'}" unit="{i18n>objectPagenumberUnit}"/>
+				</layout:VerticalLayout>
+			</layout:HorizontalLayout>
+		</semantic:headerContent>
+		<semantic:content>
+			<IconTabBar id="idIconTabBarNoIcons" class="sapUiResponsiveContentPadding" expandable="false">
+		<items>
+			<IconTabFilter text="{objectView>/lineItemListTitle}" key="info">
+			<Table id="lineItemsList"
+					class="sapUiSmallMarginTop"
+					width="auto"
+					items="{Order_Details}"
+					updateFinished="onListUpdateFinished"
+					noDataText="{i18n>objectViewLineItemTableNoDataText}"
+					busyIndicatorDelay="{objectView>/lineItemTableDelay}">
+				<columns>
+					<Column>
+						<Text text="{i18n>objectViewProductIDColumn}"/>
+					</Column>
+					<Column minScreenWidth="Tablet"
+							demandPopin="true"
+							hAlign="End">
+						<Text text="{i18n>objectViewUnitPriceColumn}"/>
+					</Column>
+					<Column minScreenWidth="Tablet"
+							demandPopin="true"
+							hAlign="End">
+						<Text text="{i18n>objectViewQuantityColumn}"/>
+					</Column>
+					<Column minScreenWidth="Tablet"
+							demandPopin="true"
+							hAlign="End">
+						<Text text="{i18n>objectViewDiscountColumn}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{ProductID}"/>
+							<ObjectNumber number="{UnitPrice}" />
+							<ObjectAttribute text="{Quantity}"/>
+							<ObjectNumber number="{Discount}" state="Warning" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+			</IconTabFilter>
+			</items>
+			</IconTabBar>
+		</semantic:content>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{objectView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+	</semantic:SemanticPage>
+</mvc:View>

@@ -1,0 +1,1 @@
+sap.ui.define([],function(){"use strict";return{numberUnit:function(t){if(!t){return""}return parseFloat(t).toFixed(2)},formatPhoto:function(t){if(!t){return""}return"data:image/png;base64,"+t.substring(104)}}});
